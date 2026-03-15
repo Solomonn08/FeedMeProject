@@ -1,18 +1,41 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FeedMe - Join the Movement</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-
-    <title>FeedMe - Join the Movement</title></head>
+</head>
 <body>
-    <h2>Create Your FeedMe Profile</h2>
-    <form method="POST">
-        <input name="username" placeholder="Username" required><br><br>
-        <input name="password" type="password" placeholder="Password" required><br><br>
-        <label>Your Allergies (comma separated):</label><br>
-        <input name="allergies" placeholder="e.g. Nuts, Dairy, Shellfish"><br><br>
-        <button type="submit">Start Eating Smart</button>
-    </form>
-    <p>Already a member? <a href="/login">Login here</a></p>
+
+    <nav>
+        <h1>FeedMe</h1>
+    </nav>
+
+    <div class="container" style="display: flex; justify-content: center; align-items: center; min-height: 85vh; padding: 20px 0;">
+        
+        <form method="POST" style="max-width: 450px;">
+            <h2 style="margin-bottom: 10px;">Create Your Profile</h2>
+            <p style="color: #666; margin-bottom: 25px; font-size: 0.9rem;">Join the movement and start eating smart today.</p>
+
+            <label style="display: block; text-align: left; font-size: 0.85rem; font-weight: 600;">Username</label>
+            <input name="username" placeholder="Choose a username" required>
+
+            <label style="display: block; text-align: left; font-size: 0.85rem; font-weight: 600;">Password</label>
+            <input name="password" type="password" placeholder="Create a strong password" required>
+
+            <label style="display: block; text-align: left; font-size: 0.85rem; font-weight: 600;">Your Allergies</label>
+            <p style="font-size: 0.75rem; color: #ff6b35; margin-bottom: 5px; text-align: left;">Comma separated (e.g. Nuts, Dairy)</p>
+            <input name="allergies" placeholder="e.g. Nuts, Dairy, Shellfish">
+
+            <button type="submit" style="width: 100%; margin-top: 15px;">Start Eating Smart</button>
+            
+            <p style="margin-top: 25px; font-size: 0.9rem; color: #444; text-align: center;">
+                Already a member? <a href="/login" style="color: var(--primary); font-weight: 600; text-decoration: none;">Login here</a>
+            </p>
+        </form>
+
+    </div>
+
 </body>
 </html>
