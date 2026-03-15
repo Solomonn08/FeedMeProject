@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FeedMe - Add New Item</title>
+</head>
+<body>
+    <h2>Add New Menu Item</h2>
+    <form method="POST">
+        <label>Item Name:</label><br>
+        <input type="text" name="name" placeholder="e.g., Avocado Toast" required><br><br>
+
+        <label>Category:</label><br>
+        <select name="category">
+            <option value="Main">Main</option>
+            <option value="Side">Side</option>
+            <option value="Drink">Drink</option>
+        </select><br><br>
+
+        <label>Base Price ($):</label><br>
+        <input type="number" step="0.01" name="price" placeholder="9.99" required><br><br>
+
+        <label>Ingredients (comma separated):</label><br>
+        <textarea name="ingredients" placeholder="Bread, Avocado, Salt, Chili Flakes"></textarea><br><br>
+
+        <label>
+            <input type="checkbox" name="allergen_free" checked> Is this item Allergen-Safe?
+        </label><br><br>
+
+        <button type="submit">Save to Menu</button>
+        <a href="/">Cancel</a>
+    </form>
+</body>
+</html>

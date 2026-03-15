@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FeedMe Dashboard</title>
+</head>
+<body>
+    <h1>FeedMe Menu Management</h1>
+    <a href="/add">Add New Item</a>
+    <hr>
+    <table border="1">
+        <tr>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Actions</th>
+        </tr>
+        {% for item in items %}
+        <tr>
+            <td>{{ item.name }}</td>
+            <td>{{ item.category }}</td>
+            <td>${{ item.base_price }}</td>
+            <td>
+                <a href="/edit/{{ item.id }}">Edit</a> | 
+                <a href="/delete/{{ item.id }}">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

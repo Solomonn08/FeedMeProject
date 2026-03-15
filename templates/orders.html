@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My FeedMe Orders</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; line-height: 1.6; }
+        .order-card { border: 2px solid #333; padding: 15px; border-radius: 8px; margin-bottom: 15px; }
+        .price { font-weight: bold; color: green; font-size: 1.2em; }
+        .btn-edit { color: blue; text-decoration: none; border: 1px solid blue; padding: 5px; border-radius: 4px; }
+        .btn-delete { color: red; text-decoration: none; border: 1px solid red; padding: 5px; border-radius: 4px; margin-left: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Your Personalized Orders</h1>
+    <p>100% Transparency: You only paid for the ingredients you kept.</p>
+    <hr>
+
+    {% if not orders %}
+        <p>Your lunchbox is empty. <a href="/">Go build a meal!</a></p>
+    {% else %}
+        {% for o in orders %}
+            <div class="order-card">
+                <p><strong>Composition:</strong> {{ o.details }}</p>
+                <p class="price">Total: ${{ "%.2f"|format(o.total_price) }}</p>
+                
+                <a href="/edit_order/{{ o.id }}" class="btn-edit">Change Ingredients</a>
+                
+                <a href="/delete_order/{{ o.id }}" class="btn-delete">Delete Order</a>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <br><br>
+    <a href="/">← Back to Menu</a>
+</body>
+</html>

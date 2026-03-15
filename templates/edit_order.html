@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head><title>Edit Your Order</title></head>
+<body>
+    <h2>Change Your Composition</h2>
+    <p>Adjust your ingredients. Pricing updates automatically.</p>
+    
+    <form method="POST">
+        {% for ing in all_ingredients %}
+            <input type="checkbox" name="ingreds" value="{{ ing }}" 
+            {% if ing in current_selected %}checked{% endif %}> {{ ing }}<br>
+        {% endfor %}
+        <br>
+        <button type="submit">Update Order</button>
+        <a href="/orders">Cancel Changes</a>
+    </form>
+</body>
+</html>

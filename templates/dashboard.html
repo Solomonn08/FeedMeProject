@@ -1,0 +1,20 @@
+<h2>Welcome, {{ user.username }}!</h2>
+<p>Your Allergies: <strong>{{ user.allergies }}</strong></p>
+
+<h3>The Menu</h3>
+{% for item in menu %}
+<div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
+    <h4>{{ item.name }} - ${{ item.price }}</h4>
+    <p>Contains: {{ item.ingredients }}</p>
+    
+    {% if item.status == "DANGER" %}
+        <p style="color: red; font-weight: bold;">⚠️ DANGER: Contains your allergens!</p>
+    {% else %}
+        <p style="color: green;">✅ Safe for you</p>
+    {% endif %}
+    
+    <a href="/build/{{ item.id }}"><button>Customize & Order</button></a>
+</div>
+{% endfor %}
+<hr>
+<a href="/orders">View My Orders</a>
