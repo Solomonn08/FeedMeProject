@@ -1,9 +1,23 @@
+<div class="container">
+
 <h2>Customize your {{ item.name }}</h2>
+
 <form method="POST">
-    <p>Uncheck what you don't want (Save $0.50 per removed item):</p>
-    {% for ing in ingredients %}
-    <input type="checkbox" name="ingredients" value="{{ ing }}" checked> {{ ing }}<br>
-    {% endfor %}
-    <br>
-    <button type="submit">Add to Lunchbox</button>
+
+<p>Uncheck what you don't want (Save $0.50 per removed item):</p>
+
+{% for ing in ingredients %}
+<label>
+<input type="checkbox" name="ingredients" value="{{ ing }}" checked>
+{{ ing }}
+</label>
+<br>
+{% endfor %}
+
+<br>
+
+<button type="submit">Add to Lunchbox</button>
+
 </form>
+
+</div>
