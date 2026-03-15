@@ -1,16 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-
-    <title>FeedMe - Login</title></head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FeedMe - Login</title>
+   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
 <body>
-    <h2>Welcome Back to FeedMe</h2>
-    <form method="POST">
-        <input name="username" placeholder="Username" required><br><br>
-        <input name="password" type="password" placeholder="Password" required><br><br>
-        <button type="submit">Login</button>
-    </form>
-    <p>New here? <a href="/register">Create an account</a></p>
+
+    <nav>
+        <h1>FeedMe</h1>
+    </nav>
+
+    <div class="container" style="display: flex; justify-content: center; align-items: center; min-height: 80vh;">
+        
+        <form method="POST">
+            <h2 style="margin-bottom: 10px;">Welcome Back</h2>
+            <p style="color: #666; margin-bottom: 25px; font-size: 0.9rem;">Please enter your credentials to continue.</p>
+
+            <label style="display: block; text-align: left; font-size: 0.85rem; font-weight: 600;">Username</label>
+            <input name="username" placeholder="Enter your username" required>
+
+            <label style="display: block; text-align: left; font-size: 0.85rem; font-weight: 600;">Password</label>
+            <input name="password" type="password" placeholder="••••••••" required>
+
+            <button type="submit" style="width: 100%; margin-top: 10px;">Login</button>
+            
+            <p style="margin-top: 20px; font-size: 0.9rem; color: #444;">
+                New here? <a href="/register" style="color: var(--primary); font-weight: 600; text-decoration: none;">Create an account</a>
+            </p>
+        </form>
+
+    </div>
+
 </body>
 </html>
