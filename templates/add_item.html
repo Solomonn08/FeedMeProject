@@ -1,35 +1,53 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FeedMe - Add New Item</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h2>Add New Menu Item</h2>
-    <form method="POST">
-        <label>Item Name:</label><br>
-        <input type="text" name="name" placeholder="e.g., Avocado Toast" required><br><br>
 
-        <label>Category:</label><br>
-        <select name="category">
-            <option value="Main">Main</option>
-            <option value="Side">Side</option>
-            <option value="Drink">Drink</option>
-        </select><br><br>
+    <nav>
+        <h1>FeedMe</h1>
+        <div class="nav-links">
+            <a href="/">Dashboard</a>
+            <a href="/menu">View Menu</a>
+        </div>
+    </nav>
 
-        <label>Base Price ($):</label><br>
-        <input type="number" step="0.01" name="price" placeholder="9.99" required><br><br>
+    <div class="container">
+        <form method="POST">
+            <h2>Add New Menu Item</h2>
+            
+            <label>Item Name</label>
+            <input type="text" name="name" placeholder="e.g., Avocado Toast" required>
 
-        <label>Ingredients (comma separated):</label><br>
-        <textarea name="ingredients" placeholder="Bread, Avocado, Salt, Chili Flakes"></textarea><br><br>
+            <label>Category</label>
+            <select name="category">
+                <option value="Main">Main Course</option>
+                <option value="Side">Side Dish</option>
+                <option value="Drink">Beverage</option>
+            </select>
 
-        <label>
-            <input type="checkbox" name="allergen_free" checked> Is this item Allergen-Safe?
-        </label><br><br>
+            <label>Base Price ($)</label>
+            <input type="number" step="0.01" name="price" placeholder="9.99" required>
 
-        <button type="submit">Save to Menu</button>
-        <a href="/">Cancel</a>
-    </form>
+            <label>Ingredients (comma separated)</label>
+            <textarea name="ingredients" rows="3" placeholder="Bread, Avocado, Salt, Chili Flakes"></textarea>
+
+            <div style="margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+                <input type="checkbox" name="allergen_free" checked style="width: auto; margin: 0;"> 
+                <span>Is this item Allergen-Safe?</span>
+            </div>
+
+            <button type="submit" style="width: 100%;">Save to Menu</button>
+            
+            <div style="text-align: center; margin-top: 15px;">
+                <a href="/" style="color: #636e72; text-decoration: none; font-size: 0.9rem;">Cancel and Go Back</a>
+            </div>
+        </form>
+    </div>
+
 </body>
 </html>
