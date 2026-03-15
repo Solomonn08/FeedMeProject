@@ -46,11 +46,29 @@ def get_safety_status(item_ingredients, user_allergies):
 
 @app.route('/')
 def home():
-    if 'user_id' not in session: return redirect(url_for('login'))
+    if 'user_id' not in session: 
+        return redirect(url_for('login'))
+    
     user = User.query.get(session['user_id'])
+    
+    # Debugging check: Does the user exist in the DB?
+    if user is None:
+        print("DEBUG: User not found in database for session ID", session['user_id'])
+        session.pop('user_id', None) # Clear invalid session
+        return redirect(url_for('login'))
+
     menu = FoodItem.query.all()
+    
     for item in menu:
-        item.status = get_safety_status(item.ingredients, user.allergies)
+        # Debugging check: Does the item exist?
+        if item is None:
+            continue
+            
+        if item.ingredients:
+            item.status = get_safety_status(item.ingredients, user.allergies)
+        else:
+            item.status = "SAFE"
+            
     return render_template('dashboard.html', user=user, menu=menu)
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -137,7 +155,40 @@ if __name__ == '__main__':
     with app.app_context():
         db.create_all()
         if not FoodItem.query.first():
-            db.session.add(FoodItem(name="Classic Burger", category="Main", ingredients="Beef, Cheese, Onion, Lettuce, Bun", price=10.0))
-            db.session.add(FoodItem(name="Peanut Satay", category="Side", ingredients="Chicken, Peanut Sauce, Soy", price=6.0))
+            # Diverse Menu Options
+            menu_data = [
+                ("Big Mac", "Main", "Beef, Lettuce, Cheese, Pickles, Bun", 5.99),
+                ("Quarter Pounder", "Main", "Beef, Onion, Pickle, Ketchup, Mustard, Bun", 6.49),
+                ("McChicken", "Main", "Chicken, Lettuce, Mayo, Bun", 4.99),
+                ("Filet-O-Fish", "Main", "Fish, Cheese, Tartar Sauce, Bun", 4.50),
+                ("Double Cheeseburger", "Main", "Beef, Cheese, Ketchup, Bun", 3.50),
+                ("Spicy Chicken Sandwich", "Main", "Chicken, Lettuce, Mayo, Bun", 5.29),
+                ("McRib", "Main", "Pork, BBQ Sauce, Onion, Pickle", 5.99),
+                ("Egg McMuffin", "Main", "Egg, Ham, Cheese, English Muffin", 3.99),
+                ("Sausage Burrito", "Main", "Egg, Sausage, Tortilla", 3.50),
+                ("Bacon Egg Biscuit", "Main", "Bacon, Egg, Cheese, Biscuit", 4.25),
+                ("French Fries", "Side", "Potato, Salt, Oil", 2.99),
+                ("Chicken McNuggets", "Side", "Chicken, Flour, Oil", 5.49),
+                ("Apple Pie", "Side", "Apple, Flour, Sugar, Cinnamon", 1.50),
+                ("Onion Rings", "Side", "Onion, Flour, Oil", 3.00),
+                ("Hash Browns", "Side", "Potato, Oil, Salt", 1.99),
+                ("Fruit Yogurt Parfait", "Side", "Yogurt, Granola, Berries", 2.99),
+                ("Side Salad", "Side", "Lettuce, Tomato, Cucumber", 2.00),
+                ("Mozzarella Sticks", "Side", "Cheese, Flour, Oil", 3.50),
+                ("Coca-Cola", "Drink", "Sugar, Water, Carbonation", 1.99),
+                ("Iced Coffee", "Drink", "Coffee, Milk, Sugar", 2.49),
+                ("Strawberry Shake", "Drink", "Milk, Strawberry, Sugar", 2.99),
+                ("Chocolate Milk", "Drink", "Milk, Cocoa, Sugar", 1.75),
+                ("Hot Chocolate", "Drink", "Milk, Cocoa, Sugar", 2.25),
+                ("Orange Juice", "Drink", "Oranges", 2.50),
+                ("Vanilla Cone", "Side", "Milk, Sugar, Wafer", 1.25),
+                ("Mocha Frappe", "Drink", "Coffee, Milk, Chocolate, Ice", 3.99),
+                ("Bottled Water", "Drink", "Water", 1.50),
+                ("Sprite", "Drink", "Sugar, Water, Carbonation", 1.99),
+                ("McFlurry", "Side", "Milk, Oreo, Sugar", 3.29),
+                ("Blueberry Muffin", "Side", "Blueberry, Flour, Sugar, Egg", 2.75)
+            ]
+            for name, cat, ing, prc in menu_data:
+                db.session.add(FoodItem(name=name, category=cat, ingredients=ing, price=prc))
             db.session.commit()
     app.run(debug=True)
