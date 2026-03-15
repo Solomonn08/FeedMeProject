@@ -1,40 +1,63 @@
-<div class="container">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FeedMe - Menu</title>
+   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
 
-<h2>Welcome, {{ user.username }}!</h2>
-<p>Your Allergies: <strong>{{ user.allergies }}</strong></p>
+    <nav>
+        <h1>FeedMe</h1>
+        <div class="nav-links">
+            <a href="/">Dashboard</a>
+            <a href="/orders">My Orders</a>
+        </div>
+    </nav>
 
-<h3>The Menu</h3>
+    <div class="container">
+        <div class="dashboard-header">
+            <div>
+                <h2 style="margin-bottom: 5px;">Welcome, {{ user.username }}!</h2>
+                <p>Your Allergies: <strong class="danger">{{ user.allergies }}</strong></p>
+            </div>
+        </div>
 
-<div class="grid">
+        <h3 style="margin: 30px 0 20px 0;">The Menu</h3>
 
-{% for item in menu %}
+        <div class="grid">
+            {% for item in menu %}
+            <div class="card" style="display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
+                
+                <div style="margin-bottom: 20px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <h3 style="margin: 0;">{{ item.name }}</h3>
+                        {% if item.status == "DANGER" %}
+                            <span class="status danger">DANGER</span>
+                        {% else %}
+                            <span class="status safe">SAFE</span>
+                        {% endif %}
+                    </div>
+                    <p style="color: #666; font-size: 0.9rem; margin-top: 10px;">
+                        Ingredients: {{ item.ingredients }}
+                    </p>
+                </div>
 
-<div class="card">
+                <div>
+                    <p class="price">${{ item.price }}</p>
+                    <a href="/build/{{ item.id }}" style="display: block; text-align: center; background-color: #ff6b35; color: white; padding: 12px; border-radius: 8px; text-decoration: none; font-weight: 600;">
+                        {% if item.status == "DANGER" %}
+                            Fix Allergens
+                        {% else %}
+                            Order Now
+                        {% endif %}
+                    </a>
+                </div>
 
-<h3>{{ item.name }}</h3>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
 
-<p>Ingredients: {{ item.ingredients }}</p>
-
-<p class="price">${{ item.price }}</p>
-
-{% if item.status == "DANGER" %}
-<p class="danger">⚠️ Contains your allergens!</p>
-{% else %}
-<p class="safe">✅ Safe for you</p>
-{% endif %}
-
-<a href="/build/{{ item.id }}">
-<button>Customize & Order</button>
-</a>
-
-</div>
-
-{% endfor %}
-
-</div>
-
-<hr>
-
-<a href="/orders">View My Orders</a>
-
-</div>
+</body>
