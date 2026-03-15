@@ -1,23 +1,23 @@
 <div class="container">
+    <form method="POST" style="max-width: 600px;"> <h2 style="text-align: left; margin-bottom: 5px;">Customize your {{ item.name }}</h2>
+        <p style="color: #636e72; margin-bottom: 25px; font-size: 0.9rem;">
+            Uncheck what you don't want (<span class="safe">Save $0.50</span> per removed item)
+        </p>
 
-<h2>Customize your {{ item.name }}</h2>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 30px;">
+            {% for ing in ingredients %}
+            <label style="display: flex; align-items: center; background: #f8f9fa; padding: 12px; border-radius: 10px; cursor: pointer; border: 1px solid #eee;">
+                <input type="checkbox" name="ingredients" value="{{ ing }}" checked 
+                       style="width: auto; margin: 0 12px 0 0; accent-color: #ff6b35;">
+                <span style="font-weight: 500;">{{ ing }}</span>
+            </label>
+            {% endfor %}
+        </div>
 
-<form method="POST">
-
-<p>Uncheck what you don't want (Save $0.50 per removed item):</p>
-
-{% for ing in ingredients %}
-<label>
-<input type="checkbox" name="ingredients" value="{{ ing }}" checked>
-{{ ing }}
-</label>
-<br>
-{% endfor %}
-
-<br>
-
-<button type="submit">Add to Lunchbox</button>
-
-</form>
-
+        <button type="submit" style="width: 100%; padding: 15px;">Add to Lunchbox</button>
+        
+        <div style="text-align: center; margin-top: 15px;">
+            <a href="/" style="color: #636e72; text-decoration: none; font-size: 0.9rem;">Back to Menu</a>
+        </div>
+    </form>
 </div>
