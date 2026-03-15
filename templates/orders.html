@@ -1,38 +1,61 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My FeedMe Orders</title>
-    <style>
-        body { font-family: sans-serif; padding: 20px; line-height: 1.6; }
-        .order-card { border: 2px solid #333; padding: 15px; border-radius: 8px; margin-bottom: 15px; }
-        .price { font-weight: bold; color: green; font-size: 1.2em; }
-        .btn-edit { color: blue; text-decoration: none; border: 1px solid blue; padding: 5px; border-radius: 4px; }
-        .btn-delete { color: red; text-decoration: none; border: 1px solid red; padding: 5px; border-radius: 4px; margin-left: 10px; }
-    </style>
+   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>Your Personalized Orders</h1>
-    <p>100% Transparency: You only paid for the ingredients you kept.</p>
-    <hr>
 
-    {% if not orders %}
-        <p>Your lunchbox is empty. <a href="/">Go build a meal!</a></p>
-    {% else %}
-        {% for o in orders %}
-            <div class="order-card">
-                <p><strong>Composition:</strong> {{ o.details }}</p>
-                <p class="price">Total: ${{ "%.2f"|format(o.total_price) }}</p>
-                
-                <a href="/edit_order/{{ o.id }}" class="btn-edit">Change Ingredients</a>
-                
-                <a href="/delete_order/{{ o.id }}" class="btn-delete">Delete Order</a>
+    <nav>
+        <h1>FeedMe</h1>
+        <div class="nav-links">
+            <a href="/">Menu</a>
+            <a href="/orders">My Orders</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="dashboard-header">
+            <h2>Your Personalized Orders</h2>
+            <p>100% Transparency: You only pay for the ingredients you keep.</p>
+        </div>
+
+        {% if not orders %}
+            <div class="card" style="text-align: center; padding: 50px;">
+                <p style="color: #666; margin-bottom: 20px;">Your lunchbox is empty.</p>
+                <a href="/" style="color: var(--primary); font-weight: 600; text-decoration: none;">← Go build a meal!</a>
             </div>
-        {% endfor %}
-    {% endif %}
+        {% else %}
+            <div style="display: flex; flex-direction: column; gap: 20px;">
+                {% for o in orders %}
+                <div class="card">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px;">
+                        <p style="margin: 0;"><strong>Composition:</strong> {{ o.details }}</p>
+                        <span class="price" style="font-size: 1.4rem;">${{ "%.2f"|format(o.total_price) }}</span>
+                    </div>
+                    
+                    <div style="display: flex; gap: 10px; margin-top: 15px; border-top: 1px solid #eee; padding-top: 15px;">
+                        <a href="/edit_order/{{ o.id }}" 
+                           style="text-decoration: none; color: var(--primary); font-weight: 600; border: 1.5px solid var(--primary); padding: 8px 16px; border-radius: 8px; transition: 0.3s;">
+                           Change Ingredients
+                        </a>
+                        
+                        <a href="/delete_order/{{ o.id }}" 
+                           style="text-decoration: none; color: #e74c3c; font-weight: 600; padding: 8px 16px; transition: 0.3s;">
+                           Delete Order
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% endif %}
 
-    <br><br>
-    <a href="/">← Back to Menu</a>
+        <div style="margin-top: 40px;">
+            <a href="/" style="text-decoration: none; color: #666; font-weight: 500;">← Back to Menu</a>
+        </div>
+    </div>
+
 </body>
 </html>
