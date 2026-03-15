@@ -1,21 +1,42 @@
 <!DOCTYPE html>
-<html>
-<head> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Your Order</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-
-    <title>Edit Your Order</title></head>
+</head>
 <body>
-    <h2>Change Your Composition</h2>
-    <p>Adjust your ingredients. Pricing updates automatically.</p>
-    
-    <form method="POST">
-        {% for ing in all_ingredients %}
-            <input type="checkbox" name="ingreds" value="{{ ing }}" 
-            {% if ing in current_selected %}checked{% endif %}> {{ ing }}<br>
-        {% endfor %}
-        <br>
-        <button type="submit">Update Order</button>
-        <a href="/orders">Cancel Changes</a>
-    </form>
-</body>
-</html>
+
+    <nav>
+        <h1>FeedMe</h1>
+        <div class="nav-links">
+            <a href="/">Menu</a>
+            <a href="/orders">Back to Orders</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="card" style="max-width: 500px; margin: auto;">
+            <h2>Change Your Composition</h2>
+            <p style="color: #666; margin-bottom: 20px;">Adjust your ingredients. Pricing updates automatically.</p>
+            
+            <form method="POST">
+                <div style="display: grid; grid-template-columns: 1fr; gap: 10px; margin-bottom: 20px;">
+                    {% for ing in all_ingredients %}
+                    <label style="display: flex; align-items: center; padding: 10px; background: #f9f9f9; border-radius: 8px; cursor: pointer;">
+                        <input type="checkbox" name="ingreds" value="{{ ing }}" 
+                               style="width: auto; margin-right: 15px;"
+                               {% if ing in current_selected %}checked{% endif %}> 
+                        <span>{{ ing }}</span>
+                    </label>
+                    {% endfor %}
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    <button type="submit" style="width: 100%;">Update Order</button>
+                    <a href="/orders" style="text-align: center; text-decoration: none; color: #666; font-size: 0.9rem; padding: 10px;">Cancel Changes</a>
+                </div>
+            </form>
+        </div>
+    </div>
