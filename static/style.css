@@ -1,201 +1,161 @@
-/* ===== Google Font ===== */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+/* ===== Google Font & Variables ===== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
-/* ===== Global ===== */
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+:root {
+    --primary: #ff6b35;
+    --primary-hover: #e85a2a;
+    --secondary: #2d3436;
+    --bg-gradient: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    --card-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05);
+    --glass: rgba(255, 255, 255, 0.8);
+    --radius: 12px;
 }
 
-body{
-    font-family:'Poppins',sans-serif;
-    background:linear-gradient(135deg,#f6f9fc,#eef2f7);
-    color:#333;
+/* ===== Reset & Global ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/* ===== Navbar ===== */
-
-nav{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:18px 50px;
-    background:#ffffff;
-    box-shadow:0 2px 10px rgba(0,0,0,0.08);
+body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--bg-gradient);
+    color: var(--secondary);
+    line-height: 1.6;
+    min-height: 100vh;
 }
 
-nav h1{
-    color:#ff6b35;
-    font-weight:600;
+/* ===== Navbar (Glassmorphism) ===== */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 10%;
+    background: var(--glass);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(255,255,255,0.3);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.03);
 }
 
-nav a{
-    margin-left:25px;
-    text-decoration:none;
-    color:#444;
-    font-weight:500;
-    transition:0.3s;
+nav h1 {
+    color: var(--primary);
+    font-size: 1.5rem;
+    letter-spacing: -0.5px;
 }
 
-nav a:hover{
-    color:#ff6b35;
+nav .nav-links a {
+    margin-left: 30px;
+    text-decoration: none;
+    color: #636e72;
+    font-weight: 500;
+    transition: all 0.3s ease;
 }
 
-/* ===== Container ===== */
-
-.container{
-    width:90%;
-    max-width:1200px;
-    margin:40px auto;
+nav a:hover {
+    color: var(--primary);
 }
 
-/* ===== Grid (Food Menu) ===== */
-
-.grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:25px;
+/* ===== Main Container ===== */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 40px auto;
 }
 
-/* ===== Food Card ===== */
-
-.card{
-    background:white;
-    border-radius:16px;
-    padding:25px;
-    box-shadow:0 10px 25px rgba(0,0,0,0.08);
-    transition:0.3s;
+/* ===== Food Grid & Cards ===== */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
 }
 
-.card:hover{
-    transform:translateY(-6px);
-    box-shadow:0 15px 35px rgba(0,0,0,0.15);
+.card {
+    background: #ffffff;
+    border-radius: var(--radius);
+    padding: 20px;
+    box-shadow: var(--card-shadow);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+    border: 1px solid rgba(0,0,0,0.02);
 }
 
-.card h3{
-    margin-bottom:10px;
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
 }
 
-.price{
-    font-weight:600;
-    color:#ff6b35;
-    margin-top:10px;
+.price {
+    display: block;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin: 15px 0;
 }
 
-/* ===== Buttons ===== */
-
-button{
-    background:linear-gradient(135deg,#ff6b35,#ff8c42);
-    border:none;
-    padding:10px 18px;
-    color:white;
-    font-weight:500;
-    border-radius:8px;
-    cursor:pointer;
-    transition:0.3s;
+/* ===== Advanced Buttons ===== */
+button, .add-btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
 }
 
-button:hover{
-    transform:scale(1.05);
+button:hover {
+    background: var(--primary-hover);
+    box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+    transform: translateY(-1px);
 }
 
-/* ===== Forms ===== */
-
-form{
-    background:white;
-    padding:40px;
-    border-radius:16px;
-    width:100%;
-    max-width:420px;
-    margin:auto;
-    box-shadow:0 10px 30px rgba(0,0,0,0.08);
+/* ===== Refined Tables ===== */
+.table-container {
+    background: white;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
 }
 
-form h2{
-    margin-bottom:20px;
-    text-align:center;
+table {
+    width: 100%;
+    border-collapse: collapse;
 }
 
-input, textarea, select{
-    width:100%;
-    padding:12px;
-    margin-top:8px;
-    margin-bottom:18px;
-    border-radius:8px;
-    border:1px solid #ddd;
-    font-family:'Poppins';
+th {
+    background: #f8f9fa;
+    color: #636e72;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    padding: 16px;
 }
 
-input:focus{
-    outline:none;
-    border-color:#ff6b35;
+td {
+    padding: 16px;
+    border-top: 1px solid #eee;
 }
 
-/* ===== Order Table ===== */
-
-table{
-    width:100%;
-    border-collapse:collapse;
-    margin-top:20px;
+/* ===== Status Pills ===== */
+.status {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
 }
 
-th,td{
-    padding:12px;
-    text-align:left;
+.safe { background: #e3fcef; color: #00b894; }
+.danger { background: #ffeaa7; color: #d63031; }
+
+/* ===== Mobile Responsiveness ===== */
+@media (max-width: 768px) {
+    nav { padding: 15px 5%; flex-direction: column; }
+    nav .nav-links { margin-top: 15px; }
+    nav .nav-links a { margin: 0 10px; font-size: 0.9rem; }
 }
-
-th{
-    background:#ff6b35;
-    color:white;
-}
-
-tr:nth-child(even){
-    background:#f7f7f7;
-}
-
-/* ===== Allergy Status ===== */
-
-.safe{
-    color:#2ecc71;
-    font-weight:600;
-}
-
-.danger{
-    color:#e74c3c;
-    font-weight:600;
-}
-
-/* ===== Dashboard Header ===== */
-
-.dashboard-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:30px;
-}
-
-/* ===== Add Item Button ===== */
-
-.add-btn{
-    padding:12px 22px;
-    border-radius:10px;
-}
-
-/* ===== Mobile ===== */
-
-@media (max-width:768px){
-
-    nav{
-        flex-direction:column;
-        gap:10px;
-    }
-
-    .grid{
-        grid-template-columns:1fr;
-    }
-
-}
-
 
