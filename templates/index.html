@@ -1,32 +1,52 @@
 <!DOCTYPE html>
-<html>
-<head> 
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-
-    <title>FeedMe Dashboard</title>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FeedMe - Dashboard</title>
+   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>FeedMe Menu Management</h1>
-    <a href="/add">Add New Item</a>
-    <hr>
-    <table border="1">
-        <tr>
-            <th>Name</th>
-            <th>Category</th>
-            <th>Price</th>
-            <th>Actions</th>
-        </tr>
-        {% for item in items %}
-        <tr>
-            <td>{{ item.name }}</td>
-            <td>{{ item.category }}</td>
-            <td>${{ item.base_price }}</td>
-            <td>
-                <a href="/edit/{{ item.id }}">Edit</a> | 
-                <a href="/delete/{{ item.id }}">Delete</a>
-            </td>
-        </tr>
-        {% endfor %}
-    </table>
+
+    <nav>
+        <h1>FeedMe Admin</h1>
+        <div class="nav-links">
+            <a href="/">Public Menu</a>
+            <a href="/add" class="add-btn" style="background: var(--primary); color: white; padding: 8px 15px; border-radius: 6px; text-decoration: none;">+ Add New Item</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="dashboard-header">
+            <h2>Menu Management</h2>
+            <p>Manage your food items and pricing below.</p>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                        <th style="text-align: right;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in items %}
+                    <tr>
+                        <td style="font-weight: 500;">{{ item.name }}</td>
+                        <td><span class="status safe" style="background: #f0f0f0; color: #666;">{{ item.category }}</span></td>
+                        <td class="price">${{ item.base_price }}</td>
+                        <td style="text-align: right;">
+                            <a href="/edit/{{ item.id }}" style="color: var(--primary); text-decoration: none; margin-right: 15px; font-weight: 600;">Edit</a>
+                            <a href="/delete/{{ item.id }}" style="color: #e74c3c; text-decoration: none; font-weight: 600;">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
 </body>
-</html>
